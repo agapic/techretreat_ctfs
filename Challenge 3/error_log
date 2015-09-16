@@ -1,0 +1,23 @@
+[30-Jul-2015 17:41:17 America/Chicago] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'agapic_techretreat.book' doesn't exist' in /home2/agapic/public_html/ullneverknow/search.php:14
+Stack trace:
+#0 /home2/agapic/public_html/ullneverknow/search.php(14): PDOStatement->execute()
+#1 {main}
+  thrown in /home2/agapic/public_html/ullneverknow/search.php on line 14
+[30-Jul-2015 19:14:50 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/agapic/public_html/ullneverknow/login.php:24) in /home2/agapic/public_html/ullneverknow/login.php on line 25
+[30-Jul-2015 21:55:44 America/Chicago] PHP Parse error:  syntax error, unexpected '=' in /home2/agapic/public_html/tryme/login.php on line 21
+[30-Jul-2015 22:07:41 America/Chicago] PHP Parse error:  syntax error, unexpected 'contains' (T_STRING) in /home2/agapic/public_html/tryme/login.php on line 24
+[30-Jul-2015 22:20:39 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:21:17 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:22:10 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:22:58 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:23:02 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:23:40 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home2/agapic/public_html/tryme/login.php on line 26
+[30-Jul-2015 22:29:23 America/Chicago] PHP Warning:  preg_match(): Delimiter must not be alphanumeric or backslash in /home2/agapic/public_html/tryme/login.php on line 17
+[30-Jul-2015 22:29:23 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/agapic/public_html/tryme/login.php:17) in /home2/agapic/public_html/tryme/login.php on line 38
+[30-Jul-2015 22:29:30 America/Chicago] PHP Warning:  preg_match(): Delimiter must not be alphanumeric or backslash in /home2/agapic/public_html/tryme/login.php on line 17
+[30-Jul-2015 22:29:30 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/agapic/public_html/tryme/login.php:17) in /home2/agapic/public_html/tryme/login.php on line 38
+[30-Jul-2015 22:29:44 America/Chicago] PHP Warning:  preg_match(): Delimiter must not be alphanumeric or backslash in /home2/agapic/public_html/tryme/login.php on line 17
+[30-Jul-2015 22:29:44 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/agapic/public_html/tryme/login.php:17) in /home2/agapic/public_html/tryme/login.php on line 38
+[30-Jul-2015 22:30:15 America/Chicago] PHP Warning:  preg_match(): Delimiter must not be alphanumeric or backslash in /home2/agapic/public_html/tryme/login.php on line 17
+[30-Jul-2015 22:30:40 America/Chicago] PHP Warning:  preg_match(): Delimiter must not be alphanumeric or backslash in /home2/agapic/public_html/tryme/login.php on line 17
+[30-Jul-2015 22:32:56 America/Chicago] PHP Parse error:  syntax error, unexpected '==' (T_IS_EQUAL) in /home2/agapic/public_html/tryme/login.php on line 18

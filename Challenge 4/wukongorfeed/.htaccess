@@ -1,0 +1,4 @@
+AuthUserFile "/home2/agapic/.htpasswds/public_html/CHALLENJOUR4/wukongorfeed/passwd"
+AuthType Basic
+AuthName "nohax"
+require valid-user

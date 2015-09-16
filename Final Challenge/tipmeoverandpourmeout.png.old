@@ -1,0 +1,19 @@
+<?php
+    if (strpos($_SERVER["HTTP_ACCEPT"], "text/html") !== FALSE) {
+      header("Content-type: text/html");
+      $headers = getallheaders ();
+    foreach ($headers as $name => $value) {
+      if ($name == "Accept") {
+        echo "<i>";
+      }
+      echo $name . ": " . $value . "<br>";
+      if ($name == "Accept") {
+        echo "</i>";
+      }
+    }
+      echo file_get_contents('../hal_no.png');
+    } else {
+      header("Content-type: image/png");
+      echo file_get_contents('../hal_yes.png');
+    }
+?>

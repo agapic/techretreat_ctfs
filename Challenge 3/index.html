@@ -1,0 +1,47 @@
+<!DOCTYPE HTML> <html> <head> <title>Sign-In</title> 
+
+<link rel="stylesheet" type="text/css" href="style.css"> 
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+</head>     
+<body>
+<div align="center">
+<legend class="legend">Being the hacker that you are.. you try to gain access to a lonely old login form. But where do you even begin? You want a hint? Too bad. I bet HBGary Federal didn't give Anonymous hints.</legend></div>
+    <form method="POST" action="login.php" class="login" >
+<fieldset>
+    
+  	<legend class="legend">Login</legend>
+    
+    <div class="input">
+    	<input type="text" placeholder="Username" name="user" required />
+      <span><i class="fa fa-user"></i></span>
+    </div>
+    
+    <div class="input">
+    	<input type="password" placeholder="Password" name="pass" required />
+      <span><i class="fa fa-lock"></i></span>
+    </div>
+    
+    <button type="submit" id="button" class="submit" name="submit"><i class="fa fa-long-arrow-right"></i></button>
+    
+  </fieldset>
+  <script>
+  $(".input").focusin(function() {
+  $( this ).find( "span" ).animate({"opacity":"0"}, 200);
+});
+
+$(".input").focusout(function() {
+  $(this).find("span").animate({"opacity":"1"}, 300);
+});
+
+
+</script>
+  <br><br>
+  <div align="center"><a href="/tryme/DOWNLOADME.zip">This might help. Your method of choice is completely optional though.</a></div>
+</form>
+
+
+
+ </body> </html> 

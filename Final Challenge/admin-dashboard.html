@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge 5 Stalker&trade;</title>
+
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="http://techretreat.ca/">
+              Tech Retreat
+            </a></li>
+            <li class="active"><a href="#">Stalker</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="index.php">Challenge 5</a></li>
+            <li><a href="ur_done/scoreboard">Leaderboards</a></li>
+            <li><a href="#"></a></li>
+
+          </ul>
+          <form class="navbar-form navbar-left" role="search" action="//google.com/search">
+            <input type="hidden" name="as_sitesearch" value="techretreat.ca" />
+            <div class="form-group">
+              <input type="text" name="q" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" name="sa" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"></a></li>
+
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <header class="container">
+      <h1>Challenge 5 Stalker&trade;</h1>
+    </header>
+
+    <main class="container">
+      <p>
+        This stalker allows you to follow either everyone, or a select few.
+        To minimize server load, please limit requests to all. (Or implement
+        some caching.)
+      </p>
+
+      <p>
+        <label for="stalk-ip">Stalk:</label><input type="text" id="stalk-ip" placeholder="All" />
+        <button onclick="stalk()">Submit Request</button>
+      </p>
+
+      <pre id="stalk"></pre>
+    </main>
+
+    <script type="text/javascript">
+      function stalk() {
+        var ip = $('#stalk-ip').val();
+        if (ip.toLowerCase() === 'all' || ip === "") {
+          $.get('logs/all.log').done(function(result) {
+            $('#stalk').text(result);
+          });
+        } else {
+          $('#stalk').text("Can't find that IP.");
+          $.get('logs/' + ip + '.log').done(function(result) {
+            $('#stalk').text(result);
+          });
+        }
+      }
+    </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>

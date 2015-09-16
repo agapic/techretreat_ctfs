@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solutions to Challenge 5</title>
+
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="http://techretreat.ca/">
+              Tech Retreat
+            </a></li>
+            <li class="active"><a href="#">Solutions</a></li>
+            <li><a href="index.php">Challenge 5</a></li>
+            <li><a href="ur_done/scoreboard">Leaderboards</a></li>
+            <li><a href="#"></a></li>
+
+          </ul>
+          <form class="navbar-form navbar-left" role="search" action="//google.com/search">
+            <input type="hidden" name="as_sitesearch" value="techretreat.ca" />
+            <div class="form-group">
+              <input type="text" name="q" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" name="sa" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"></a></li>
+
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <header class="container">
+      <h1>Solutions to Challenge 5</h1>
+    </header>
+
+    <main class="container">
+      <p>
+        Congratulations to everyone who attempted Challenge 5!
+        We hope you enjoyed it.
+      </p>
+
+      <h2>Landing Page</h2>
+      <p>So there are three parts to a response: the status line, the headers,
+        and the body. You were told that the body wasn't important. So look at
+        the header (you can do this through your browser's developer tools),
+        and you will see something like:</p>
+
+      <pre><code>Connection: Keep-Alive
+Content-Length: 608
+Content-Type: text/html
+Date: Fri, 14 Aug 2015 14:26:53 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.11</code></pre>
+
+      <p>Hmm, nothing too useful here. So let's look at the status line then.
+        Great! It says <q>418 I'm a teapot</q>. So the answer is simply,
+        <q>teapot</q>. Type it into the box and move on.</p>
+
+      <h2>HAL Accepts</h2>
+      <p>
+        You needed to request the image with an http request header whose
+        <code>Accept</code> value didn't contain <code>text/html</code>.
+        Easiest way of doing this would be to edit the page using something
+        like chrome's inspect-element and insert:
+      </p>
+      <pre><code>&lt;img src="./tipmeoverandpourmeout.png" /&gt;</code></pre>
+      <p>
+        while on the page (causing it to load itself as an image without the
+        <code>text/html</code> accepts header).
+      </p>
+
+      <h2>What options do you have?</h2>
+      <p>As is usual, first look up the italicized term in context. Googling
+        <q>HTTP options</q> is a good start. We see that options is an accepted
+        method of HTTP. So we should send an OPTIONS request. There are several
+        ways to do this, but we'll use the browser because it requires no external
+        tools.
+      </p>
+
+      <p>Open your console and make a new XHR request:</p>
+
+      <pre><code>var xhr = new XMLHttpRequest();
+xhr.open('OPTIONS', 'youmayproceed.php');
+xhr.send()</code></pre>
+
+      <p>Then in the Network section of your browser's devtools, find the new
+        OPTIONS request. There, the important header is ALLOW. You see that we
+        can GET, REFRESH, or SOLUTION. Well we've already GET-ed (GOT?) the page
+        and that wasn't too useful, and we don't really need to REFRESH, so
+        let's try a SOLUTION request. Again with XHR:</p>
+
+        <pre><code>var xhr = new XMLHttpRequest();
+xhr.open('SOLUTION', 'youmayproceed.php');
+xhr.send()</code></pre>
+
+      <p>This time if we look in our console we see we got a 204 No Content. Not
+        to worry, though, as in the headers we see
+        <code>Set-Cookie: youmayproceed=true</code>. Usually cookies are used
+        for server-to-client communication, so let's just refresh the page and
+        see if it works... and it does! So proceed to the next page.</p>
+
+      <h2>Expires</h2>
+      <p>
+        This one's a reference to PHP developer Sascha Schumann, whose birthday is supposedly
+        Thu, 19 Nov 1981 08:52:00 GMT. That's also the date that PHP sets the "Expires" header to
+        if you're not supposed to cache the page.
+      </p>
+
+      <h2>PHP</h2>
+      <p>
+        PHP is an interesting language with many quirky features... to say the least.
+        This challenge takes advantage of a few which don't seem to make sense
+      </p>
+      <hr>
+      <pre><code>if (isset($_GET["referer"])) {</code></pre>
+      <p>
+        First, the website appears to have expected the 'referer' in the GET request.
+        For those who don't know, GET is viewable in the address bar and comes in the form of
+        http://somewebsite.com/somepage.php?key1=value1&amp;key2=value2&amp;key3=value3
+      </p>
+      <p>So, to get past this first error, simply set the 'referer' key to some value</p>
+      <hr>
+      <pre><code>assert($_GET["referer"] == "weneedtogodeeper");</code></pre>
+      <p>
+        Oops. Right after that it appears that the website actually wants the value
+        "weneedtogodeeper" as the referer. No problem. We'll just do exactly that
+      </p>
+      <hr>
+      <pre><code>if (isset($_COOKIE["secret"])) {</code></pre>
+      <p>
+        Ok, so now the website wants a cookie called 'secret'.
+        We can do that in Javascript from the URL bar or the developer console.
+        Something like this would work fine
+        <pre><code>document.cookie = "secret=asdf";</code></pre>
+      </p>
+      <hr>
+      <pre><code>assert(strpos($_COOKIE["secret"], " techretreat is awesome") !== FALSE);</code></pre>
+      <p>
+        We refresh the page to see the new error. It appears that the cookie must have the phrase
+        " techretreat is awesome" in it. No problem. We'll just run some new Javascript:
+        <pre><code>document.cookie = "secret=asdf techretreat is awesome";</code></pre>
+      </p>
+      <hr>
+      <pre><code>$magicnumber = 18 + $_COOKIE["secret"];
+assert($magicnumber == 42);</code></pre>
+      <p>
+        So here we see the first interesting PHP quirk. If you try to convert a String to an integer,
+        it'll parse the first number in the String, unless it doesn't start with a number.
+        So the trick is to find what number adds with 18 to give 42, then prepend the cookie with that.
+        You should end up with something like
+        <pre><code>document.cookie = "24 techretreat is awesome";</code></pre>
+      </p>
+      <hr>
+      <pre><code>if (isset($_GET["cast"])) {</code></pre>
+      <p>So the website is looking for a GET key called "cast". Let's give it one. I chose asdf again</p>
+      <p>Remeber that any GET keys after the first will be delimited by an ampersand</p>
+      <hr>
+      <pre><code>$magicvalue = (asdf) $magicnumber;
+  assert($magicvalue == NULL);</code></pre>
+      <p>
+        It appears that the website is actually casting $magicnumber, which is 42, to whatever you give it.
+        In this case, it's gone and cast to "asdf", which isn't actually legal.
+        It looks like somehow, we need to make $magicvalue null, just by casting.
+        Fortunately, after reading the <a href="http://php.net/manual/en/language.types.null.php">docs</a>,
+        we see that by casting to "unset", it will return a result of NULL. Cool
+      </p>
+      <hr>
+      <pre><code>if (isset($_GET["firstnumber"]) &amp;&amp; isset($_GET["secondnumber"])) {</code></pre>
+      <p>So we put add two more parameters to our GET request. There's really not much to say here</p>
+      <hr>
+      <pre><code>assert($value1 - $value2 == 0 &amp;&amp; $value1 != $value2);</code></pre>
+      <p>
+        Weird. Somehow, we need to get two values who when subtracted from each other, equal zero,
+        but when compared, they're not equal to each other. Fortunately, PHP can help with more quirks!
+        Because Strings can't necessarily be 'subtracted', PHP will convert them to integers first.
+        Recall that the integers will be pulled from the first number in the string, or 0 if it starts with a letter.
+        That means we can give it any two strings that start with the same number, but end with some other letters.
+        For example, "42tech" and "42retreat" work.
+      </p>
+      <hr>
+      <pre><code>//TODO: Fix bugs in code, link to next part cantthinkofagoodname.php
+echo "That's all we got for now"</code></pre>
+      <p>
+        Looks like the author forgot a semicolon. Fortunately for us because the next part
+        is linked in the comment. Looks like we're all done here.
+      </p>
+
+      <h2>Referer Spam</h2>
+      <p>This is a coding challenge. (Or, you could cheat and use your browser's
+      Find button, but there were several protections that made it hard to get
+      right.)</p>
+
+      <p>The following Javascript code easily solves the problem. It can be
+        typed directly into the browser console. Understanding this code is left
+        as a challenge for the reader.</p>
+
+      <pre><code><!--
+-->var relevant = [].slice.call(document.querySelector('pre').textContent.split('referer')[443]);
+console.log(relevant.filter(function(x) {return 'a' &lt;= x &amp;&amp; x &lt;= 'z';}).slice(0, 5).join(''));<!--
+--></code></pre>
+
+      <p>For those of you who prefer an expressive, dynamic language like
+        Python, one author has contributed the following code:</p>
+      <pre><code><!--
+-->import string
+with open('raw.bin') as f:
+    blob = f.read()
+print("".join(c for c in blob.split('referer')[443] if c in string.ascii_lowercase)[:5])<!--
+--></code></pre>
+
+      <p>And finally, for those who prefer a performant, static language like
+        C++, another author has contributed the following:</p>
+      <pre><code><!--
+-->#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+int main(){
+    std::ifstream file("raw.php.txt", std::ios::in | std::ios::binary);
+    if (file.is_open()){
+        std::string contents, step2;
+        std::size_t length = 0;
+
+        // seek to end
+        file.seekg(0, std::ios::end);
+        // pre allocate file length in memory
+        length = file.tellg();
+        contents.resize(length);
+        // seek to beginning
+        file.seekg(0, std::ios::beg);
+        // Read file
+        file.read(&amp;contents[0], contents.size());
+        file.close();
+
+        std::size_t position = 0;
+        for (unsigned int times = 0; times &lt; 443; ++times){
+            position = contents.find("referer", position) + 7;
+            //std::cout &lt;&lt; position &lt;&lt; std::endl;
+        }
+        step2 = contents.substr(position, length - position);
+        step2.erase(
+            std::remove_if(
+                step2.begin(),
+                step2.end(),
+                [](char x){
+                    return !std::islower(x);
+                }
+            )
+        );
+        std::cout &lt;&lt; step2.substr(0, 5) &lt;&lt; std::endl;
+    }else{
+        std::cout &lt;&lt; "Error: Could not open raw.php.txt" &lt;&lt; std::endl;
+    }
+    return 0;
+}<!--
+--></code></pre>
+
+      <h2>Google</h2>
+      <p>Not so fast! The leaderboard can only be accessed by a Google spider.
+        Darn. But wait &mdash; how does the server know that we aren't google?
+        Through the <code>User-Agent</code>, of course! We just need to spoof
+        that. There are lots of browser extensions that will let you do this.
+        Just spoof the user agent to something like
+        <code>Googlebot/2.1 (+http://www.googlebot.com/bot.html)</code> and
+        you're finally done!</p>
+    </main>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>

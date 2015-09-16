@@ -1,0 +1,20 @@
+# BEGIN rewrites
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    RewriteRule ^tipmeoverandpourmeout.png  tmo.php [PT]
+    RewriteRule ^robots.txt  robots.php [PT]
+</IfModule>
+# END rewrites
+
+AuthUserFile /var/www/html/final_challenge/assets/.htpasswd
+
+AuthName "Admin Only"
+
+AuthType Basic
+
+<Files ~ "^(admin-dashboard)\.html">
+
+  require valid-user
+
+</Files>

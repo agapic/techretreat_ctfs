@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "stophax"
+AuthUserFile "/home2/agapic/.htpasswds/public_html/CHALLENJOUR4/wukongorfeed/jaxjungleorfeed/passwd"
+require valid-user

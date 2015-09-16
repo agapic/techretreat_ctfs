@@ -1,0 +1,4 @@
+AuthUserFile "/home2/agapic/.htpasswds/public_html/nicejob/passwd"
+AuthType Basic
+AuthName "or not..
+require valid-user

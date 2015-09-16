@@ -1,0 +1,4 @@
+AuthUserFile "/home2/agapic/.htpasswds/public_html/nota404/challenge1/challenge2/checkpoint/passwd"
+AuthType Basic
+AuthName "Ch-h-h-h-eckpoint! You're halfway there!"
+require valid-user
